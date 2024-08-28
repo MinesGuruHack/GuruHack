@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Choose Language</title>
-    <style>
-      @font-face {
-        font-family: "Intro";
-        src: url("intro.otf") format("opentype");
-      }
-      body {
-        font-family: "Intro", sans-serif;
-        background-image: url("fon.jpg");
+<head>
+<meta charset="UTF-8">
+<title>Choose Language</title>
+<style>
+    @font-face {
+        font-family: 'Intro';
+        src: url('intro.otf') format('opentype');
+    }
+    body {
+        font-family: 'Intro', sans-serif;
+        background-image: url('fon.jpg');
         background-size: cover;
         background-position: center;
         height: 100vh;
@@ -19,13 +19,13 @@
         justify-content: center;
         align-items: center;
         margin: 0;
-      }
-      .buttons {
+    }
+    .buttons {
         display: flex;
         justify-content: center;
         align-items: center;
-      }
-      .button {
+    }
+    .button {
         background-color: orange;
         border: none;
         color: white;
@@ -35,18 +35,18 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 40px; /* was 32px */
-        margin: 5px 7.5px; /* was 4px 15px */
+        font-size: 47px; /* was 32px */
+        margin: 2px 7.5px; /* was 4px 15px */
         cursor: pointer;
-        width: 150px; /* was 200px */
+        width: 257px; /* was 200px */
         height: 100px; /* was 100px */
         transition: all 0.3s ease;
         border-radius: 7.5px; /* was 15px */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         position: relative;
         overflow: hidden;
-      }
-      .button:before {
+    }
+    .button:before {
         content: "";
         position: absolute;
         top: 0;
@@ -56,36 +56,28 @@
         background: rgba(255, 255, 255, 0.2);
         transform: skewX(-30deg);
         transition: left 0.7s ease;
-      }
-      .button:hover:before {
+    }
+    .button:hover:before {
         left: 100%;
-      }
-      .button:hover {
+    }
+    .button:hover {
         background-color: #e69500;
         box-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
         transform: translateY(-1px); /* was -2px */
-      }
-      h1 {
+    }
+    h1 {
         color: white;
         margin-bottom: 20px; /* was 40px */
-        font-size: 50px; /* was 64px */
+        font-size: 71px; /* was 64px */
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-      }
-    </style>
-  </head>
-  <body>
+    }
+</style>
+</head>
+<body>
     <h1>Choose Language</h1>
     <div class="buttons">
-      <a
-        href="rus.html"
-        class="button"
-        >ESP</a
-      >
-      <a
-        href="en.html"
-        class="button"
-        >ENG</a
-      >
+        <a href="rus.html" class="button">ESP</a>
+        <a href="en.html" class="button">ENG</a>
     </div>
-  </body>
+</body>
 </html>
