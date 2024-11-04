@@ -1,56 +1,34 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aviator</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body class="page">
+<html lang="en"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./static/Aviator/style.css">
+  <title>Aviator</title>
+<style type="text/css" id="operaUserStyle"></style></head>
 
-    <div class="loader">
-        <div class="bar"></div>
+<body>
+  <script src="./static/Aviator/script.js"></script>
+  <div style="position: absolute;">
+    <div class="container">
+      <img class="pers-animate" src="./static/Aviator/resource/plane top.svg" alt="plane">
+      <div class="print-signal-button" id="get-signal" style="z-index: 11;">
+        <span >GET<br>SIGNAL</span>
+      </div>
+      <div class="print-signal" style="position: absolute;">
+        <span id="print-signal"></span>
+      </div>
+        <div class="stop-signal-time deactivate" id="stop-signal-time-block">
+          <p class="stop-timer" id="stop-timer"></p>
+          <div class="stop-progress" id="stop-progress"></div>
+        </div>
+      <div class="top-content">
+        <img draggable="false" src="./static/Aviator/resource/logo.svg" alt="logo" class="logo-game">
+        <p class="name-bot">@luckyguruhack</p>  <!-- Thymeleaf expression -->
+      </div>
+      <div class="button-game">
+        <a href="https://1weoky.life/casino/list?open=register&p=1fv2" class="game-here" target="_blank">GAME HERE</a>
+      </div>      
     </div>
+  </div>
 
-    
-    
-   
-    <div class="cv">
-        <img class="obloko" src="images/obl.svg">
-    </div>
-
-    
-  
-   
-    <div class="winner">
-        <img  class="luck" src="images/avia_logo.svg">
-        <img class="win" src="images/1win_logo.png">
-    </div>
-
-
-    <div class="rocket">
-        <button id="startButton" class="button" onclick="generateRandomNumber()">GET SIGNAL</button>
-        <p id="time" class="timer"></p>
-        <p id="chance" class="ch"></p>
-        <p id="timers" class="timerss"></p>
-        <p class="ti">Time:</p>
-        <p class="sh">Chance:</p>
-        <p class="tg">Before the signal:</p>
-        <img class="rocket__boy" src="./images/avia3.svg"/>
-
-       
-        <div class="section"></div>
-        <div class="section2"></div>
-        <div class="section3"></div>
-        
-
-
-        
-    <script src="script.js"></script>
-   
-    <div id="result" class="rand"></div>
-    
-
-</body>
-</html>
+  <script src="./static/Aviator/main.js"></script>
+</body></html>
