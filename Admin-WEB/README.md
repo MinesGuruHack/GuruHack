@@ -1,15 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, initial-scale=1.0, initial-scale=1.0, user-scalable=no" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="robots" content="noindex,nofollow" />
-    <script src="https://telegram.org/js/telegram-web-app.js?2"></script>
-    <title>Choose Language</title>
-    <style>
+<meta charset="UTF-8">
+<title>Choose Language</title>
+<style>
     @font-face {
         font-family: 'Intro';
         src: url('intro.otf') format('opentype');
@@ -18,7 +12,6 @@
         font-family: 'Intro', sans-serif;
         background-image: url('fon.jpg');
         background-size: cover;
-        background-repeat: no-repeat;
         background-position: center;
         height: 100vh;
         display: flex;
@@ -27,7 +20,6 @@
         align-items: center;
         margin: 0;
     }
-    
     .buttons {
         display: flex;
         justify-content: center;
@@ -43,11 +35,11 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 20px; /* was 32px */
+        font-size: 16px; /* was 32px */
         margin: 2px 7.5px; /* was 4px 15px */
         cursor: pointer;
-        width: 7em; /* was 200px */
-        height: 30px; /* was 100px */
+        width: 100px; /* was 200px */
+        height: 50px; /* was 100px */
         transition: all 0.3s ease;
         border-radius: 7.5px; /* was 15px */
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
@@ -84,7 +76,7 @@
 <body>
     <h1>Choose Language</h1>
     <div class="buttons">
-        <a href="rus.html" class="button">ESP</a>
+        <a href="rus.html" class="button">RUS</a>
         <a href="en.html" class="button">ENG</a>
     </div>
 </body>
