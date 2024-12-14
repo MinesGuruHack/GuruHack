@@ -33,7 +33,7 @@ function getRan(min, max) {
 
 
 function pad(number) {
-    return (number < 10 ? '0' : '') + number;
+    return (number < 4 ? '0' : '') + number;
 }
 
 
