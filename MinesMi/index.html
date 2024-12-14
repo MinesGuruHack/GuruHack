@@ -17,6 +17,7 @@
             justify-content: center; /* Выравнивание по центру */
             align-items: center;
             background-color: #0875c7;
+            margin-top: -30px;
         }
 
         .container {
@@ -269,12 +270,119 @@
             -webkit-touch-callout: none; /* Отключает вызов меню на долгий тап */
         }
 
+        
+        @keyframes loading {
+
+        0% {
+            width: 100%;
+        }
+
+        100% {
+            width: 0%;
+        }
+        }
+
+
+        #loading-text span {
+        display: inline-block;
+        animation: bounce 0.3s ease infinite alternate;
+        font-size: 42px;
+        color: rgb(209, 178, 5);
+        text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                    0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                    0 2.25px 0 transparent, 0 2.5px 2.5px rgba(0, 0, 0, 0.2);
+        }
+
+        #loading-text span:nth-child(1) { animation-delay: 0s; }
+        #loading-text span:nth-child(2) { animation-delay: 0.1s; }
+        #loading-text span:nth-child(3) { animation-delay: 0.2s; }
+        #loading-text span:nth-child(4) { animation-delay: 0.3s; }
+        #loading-text span:nth-child(5) { animation-delay: 0.4s; }
+        #loading-text span:nth-child(6) { animation-delay: 0.5s; }
+        #loading-text span:nth-child(7) { animation-delay: 0.6s; }
+
+        @keyframes bounce {
+        0% {
+            transform: translateY(0px);
+            text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                        0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                        0 2.25px 0 transparent, 0 2.5px 2.5px rgba(0, 0, 0, 0.2);
+        }
+        100% {
+            transform: translateY(-5px);
+            text-shadow: 0 0.25px 0 #ccc, 0 0.5px 0 #ccc, 0 0.75px 0 #ccc, 0 1px 0 #ccc,
+                        0 1.25px 0 #ccc, 0 1.5px 0 transparent, 0 1.75px 0 transparent, 0 2px 0 transparent,
+                        0 2.25px 0 transparent, 0 12.5px 6.25px rgba(0, 0, 0, 0.1);
+        }
+        }
+
+        .tg_icon {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        } 
+
+
+        /* Стили для кнопки */
+        .button2 {
+            width: 300px;
+            height: 50px;
+            border-radius: 12px;
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 20px;
+            letter-spacing: 0.08em;
+            border: none; /* Можно заменить на границу, если нужно */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(221, 221, 221);
+            text-shadow: rgb(138, 138, 138) 0px 0px 20px;
+            background: transparent; /* Прозрачный фон */
+            box-shadow: none; /* Убираем тени или настраиваем по необходимости */
+            cursor: pointer;
+            position: relative; /* Необходим для псевдоэлемента, если используется */
+            z-index: 1; /* Для обеспечения, что кнопка выше псевдоэлемента */
+            top: 10px;
+        }
+
+        /* Псевдоэлемент для прозрачного прямоугольника под кнопкой */
+        .button2::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.2); /* Полупрозрачный черный фон */
+            border-radius: 12px; /* Соответствует кнопке */
+            z-index: -1; /* Размещает псевдоэлемент позади кнопки */
+        }
+
+        /* Дополнительные стили для кнопки при наведении (опционально) */
+        .button2:hover::before {
+            background: rgba(0, 0, 0, 0.3); /* Изменение фона при наведении */
+        }
+
 
 
 
     </style>
 </head>
 <body>
+    <div class="winner">
+        <h1 id="loading-text" class="win">
+            <span>G</span>
+            <span>U</span>
+            <span>R</span>
+            <span>U</span>
+            <span>H</span>
+            <span>A</span>
+            <span>C</span>
+            <span>K</span>
+        </h1>
+    </div>
     <div class="mines-oval">
         <label for="mines">Mines:</label>
         <select id="mines">
@@ -419,8 +527,14 @@
             <img src="static/miminesrestart.png" alt="Restart" />
         </button>
         <button class="bet-button">GET SIGNAL</button>
+        
     </div>
-
+    <a target="_blank2">
+        <button class="button2">
+            <img class="tg_icon" src="./static/Telegram_logo.svg">
+            @luckyguruhack
+        </button>
+    </a>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
 <script>
 function triggerHapticFeedback() {
@@ -476,49 +590,49 @@ function flipRectangles() {
                 starCount = 6; // 5 ловушек = 6 звезд
                 break;
             case 6:
-                starCount = 5; // 6 ловушек = 5 звезд
+                starCount = 6; // 6 ловушек = 6 звезд
                 break;
             case 7:
-                starCount = 4; // 7 ловушек = 4 звезды
+                starCount = 5; // 7 ловушек = 6 звезды
                 break;
             case 8:
-                starCount = 3; // 8 ловушек = 3 звезды
+                starCount = 5; // 8 ловушек = 5 звезды
                 break;
             case 9:
-                starCount = 3; // 9 ловушек = 3 звезды
+                starCount = 4; // 9 ловушек = 4 звезды
                 break;
             case 10:
-                starCount = 2; // 10 ловушек = 2 звезды
+                starCount = 4; // 10 ловушек = 4 звезды
                 break;
             case 11:
-                starCount = 2; // 11 ловушек = 2 звезды
+                starCount = 3; // 11 ловушек = 4 звезды
                 break;
             case 12:
-                starCount = 2; // 12 ловушек = 2 звезды
+                starCount = 3; // 12 ловушек = 3 звезды
                 break;
             case 13:
-                starCount = 1; // 13 ловушек = 1 звезда
+                starCount = 3; // 13 ловушек = 3 звезда
                 break;
             case 14:
-                starCount = 1; // 14 ловушек = 1 звезда
+                starCount = 2; // 14 ловушек = 3 звезда
                 break;
             case 15:
-                starCount = 1; // 15 ловушек = 1 звезда
+                starCount = 2; // 15 ловушек = 2 звезда
                 break;
             case 16:
-                starCount = 1; // 16 ловушек = 1 звезда
+                starCount = 2; // 16 ловушек = 2 звезда
                 break;
             case 17:
-                starCount = 1; // 17 ловушек = 1 звезда
+                starCount = 2; // 17 ловушек = 2 звезда
                 break;
             case 18:
-                starCount = 1; // 18 ловушек = 1 звезда
+                starCount = 2; // 18 ловушек = 2 звезда
                 break;
             case 19:
-                starCount = 1; // 19 ловушек = 1 звезда
+                starCount = 2; // 19 ловушек = 2 звезда
                 break;
             case 20:
-                starCount = 1; // 20 ловушек = 1 звезда
+                starCount = 2; // 20 ловушек = 2 звезда
                 break;
             default:
                 starCount = 0;
