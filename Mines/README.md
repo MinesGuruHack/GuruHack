@@ -1,1 +1,0 @@
-# mines.updatedbot.github.io
