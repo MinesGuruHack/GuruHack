@@ -390,16 +390,29 @@
         .number-box.number-9 { 
             text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px #1E9841;
         }
+        .clickable-image {
+                position: absolute; /* Позиционирование относительно ближайшего родителя с position: relative */
+                top: 1vh;           /* Отступ сверху 1% от высоты окна */
+                left: 5vw;          /* Отступ слева 5% от ширины окна */
+                cursor: pointer;    /* Указатель мыши при наведении */
+                width: 50px;         /* Задание ширины изображения */
+                height: 50px;        /* Задание высоты изображения */
+                border-radius: 50%;  /* Устанавливает круглую форму */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Тень изображения */
+                z-index: 100;        /* Задание слоя, чтобы кнопка была поверх других элементов */
+            }
     </style>
 </head>
 <body>
-    <!-- Верхняя часть с анимированным текстом -->
+    <a href="https://minesguruhack.github.io/GuruHack/WEB1/">
+        <img src="static/back.png" alt="Кнопка назад" class="clickable-image">
+    </a>
     <div class="winner">
         <h1 id="loading-text" class="win">
-            <span>D</span>
-            <span>E</span>
-            <span>V</span>
-            <span>I</span>
+            <span>G</span>
+            <span>U</span>
+            <span>R</span>
+            <span>U</span>
             <span>H</span>
             <span>A</span>
             <span>C</span>
@@ -427,7 +440,7 @@
     <div class="telegram-info">
         <!-- Цветной логотип Telegram -->
         <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram Logo">
-        @devicolorhack
+        @minesguruhack
     </div>
 
     <script>
