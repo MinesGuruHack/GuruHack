@@ -18,7 +18,7 @@ function getRan(min, max) {
 }
 
 async function checkSignal() {
-    let randomNumber1 = getRan(1.1, 5.0).toFixed(2);
+    let randomNumber1 = getRan(1.6, 4.0).toFixed(2);
     const url = 'https://crash-gateway-cc-cr.gamedev-tech.cc/state?id_n=1play_rocketqueen&id_i=1';
     const response = await fetch(url, {
         headers: {
