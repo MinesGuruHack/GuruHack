@@ -16,7 +16,7 @@
             color: white;
         }
         #header {
-            background-color: #333;
+            background-color: #121212; /* Темный цвет фона */
             color: #FFD700; /* Желтый цвет */
             padding: 20px;
             width: 100%;
@@ -33,36 +33,39 @@
             text-align: center; /* Центрируем результат */
         }
         #buttons {
+            display: flex;
+            align-items: center; /* Чтобы кнопки и селекты были на одной линии */
             margin-top: auto; /* Убираем отступ сверху */
             margin-bottom: 20px; /* Небольшой отступ от нижнего края */
-            display: flex;
-            flex-direction: column;
-            align-items: stretch; /* Кнопки занимают всю ширину */
-            width: 90%; /* Меняем ширину на 90% для лучшей отзывчивости */
-            max-width: 400px; /* Добавляем максимальную ширину */
+            max-width: 400px; /* Максимальная ширина блока кнопок */
+            flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
         }
         .button-container {
             display: flex;
-            justify-content: space-between; /* Располагаем кнопки рядами */
+            flex-direction: row; /* Размещаем кнопки и селекты в строку */
+            width: 100%;
+            justify-content: space-between; /* Размещаем элементы на всю ширину */
         }
         button, select {
-            font-size: 16px; /* Уменьшаем размер шрифта для мобильных */
-            padding: 12px; /* Уменьшаем внутренние отступы */
-            margin: 5px; /* Отступы между кнопками */
+            font-size: 18px; /* Увеличиваем размер шрифта для кнопок и селектов */
+            padding: 16px; /* Увеличиваем внутренние отступы */
+            margin: 5px; /* Отступы между элементами */
             cursor: pointer; /* Курсор в виде указателя при наведении */
             border: none; /* Убираем бордер */
             border-radius: 5px; /* Округляем углы кнопок */
             background-color: #888; /* Серый цвет для кнопок выбора */
             color: white;
-            flex: 1; /* Занимает всю доступную ширину */
+            flex: 1; /* Занимаем равное пространство */
         }
         button:hover {
             background-color: #777; /* Темно-серый цвет при наведении для кнопок выбора */
         }
         button#showResultButton {
             background-color: #4CAF50; /* Зеленый цвет */
-            height: 50px; /* Высота кнопки показать результат */
-            width: 100%; /* Ширина, равная ширине контейнера */
+            height: 60px; /* Высота кнопки показать результат */
+            font-weight: bold; /* Жирный шрифт */
+            font-size: 20px; /* Более крупный текст */
+            flex-basis: 100%; /* Займёт всю ширину */
         }
         button#showResultButton:hover {
             background-color: #45a049; /* Темно-зеленый цвет при наведении */
@@ -79,16 +82,20 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        
-        /* Медиа-запросы для мобильных устройств */
-        @media (max-width: 600px) {
-            button, select {
-                font-size: 14px; /* Уменьшаем размер шрифта для маленьких экранов */
-                padding: 10px; /* Уменьшаем внутренние отступы */
-            }
-            button#showResultButton {
-                height: 45px; /* Уменьшаем высоту кнопки на маленьких экранах */
-            }
+        #contactBox {
+            width: 100%; /* Занимает всю ширину */
+            max-width: 400px; /* Максимальная ширина окошка */
+            background-color: rgba(128, 128, 128, 0.7); /* Серый цвет с прозрачностью */
+            color: white;
+            padding: 16px; /* Внутренние отступы */
+            border-radius: 5px; /* Округление углов */
+            text-align: center; /* Центрируем текст */
+            margin-top: 20px; /* Отступ сверху, равный отступу между кнопками */
+            display: flex; /* Изменение на flex для вертикального центрирования текста */
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            font-size: 20px; /* Увеличиваем размер текста */
+            font-weight: bold; /* Жирный текст */
         }
     </style>
 </head>
@@ -118,7 +125,6 @@
                 <option value="Название 9">Название 9</option>
                 <option value="Название 10">Название 10</option>
             </select>
-
             <select id="timeSelect">
                 <option value="">Выберите Время</option>
                 <option value="5 мин">5 мин</option>
@@ -129,8 +135,12 @@
                 <option value="30 мин">30 мин</option>
             </select>
         </div>
-
         <button id="showResultButton">Показать Результат</button>
+    </div>
+
+    <div id="contactBox">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Telegram_logo.svg" alt="Telegram" width="24" height="24"/>
+        <span>@username</span>
     </div>
 
     <script>
@@ -142,6 +152,7 @@
             const resultDiv = document.getElementById("result");
             const nameSelect = document.getElementById("nameSelect");
             const timeSelect = document.getElementById("timeSelect");
+            const contactBox = document.getElementById("contactBox"); // Получаем контакт-бокс
 
             const selectedName = nameSelect.value;
             const selectedTime = timeSelect.value;
@@ -159,8 +170,10 @@
             }
 
             lastResultTime = currentTime;
+
             loadingDiv.style.display = "flex"; // Показываем загрузку
             resultDiv.style.display = "none"; // Скрываем результат
+            contactBox.style.display = "flex"; // Убедимся, что контакт-бокс виден
 
             setTimeout(() => {
                 loadingDiv.style.display = "none"; // Скрываем блок загрузки
