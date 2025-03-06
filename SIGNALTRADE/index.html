@@ -6,122 +6,171 @@
     <title>Веб Приложение</title>
     <style>
         body {
-            background-color: #121212;
-            color: #ffffff;
+            background-color: #121212; /* Темный фон */
+            color: #ffffff; /* Белый цвет текста */
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             height: 100vh;
             margin: 0;
             font-family: Arial, sans-serif;
+            position: relative; /* Относительное позиционирование для body */
+            padding-bottom: 60px; /* Отступ внизу для кнопок */
         }
 
-        #title {
-            font-size: 48px;
-            color: yellow;
-            margin-bottom: 20px;
-            text-align: center;
+        #header {
+            background-color: #000; /* Черный фон для заголовка */
+            width: 100%; /* Заголовок на всю ширину */
+            padding: 10px 0; /* Отступы сверху и снизу */
+            text-align: center; /* Выравнивание по центру */
+            position: fixed; /* Фиксированное положение */
+            top: 0; /* Прилегание к верхней части */
+            z-index: 1000; /* Поверх других элементов */
+        }
+
+        #header h1 {
+            color: yellow; /* Желтый цвет текста */
+            margin: 0; /* Удаление отступов по умолчанию у заголовка */
+        }
+
+        #result {
+            display: none; /* Скрытие блока с результатом по умолчанию */
+            font-size: 24px; /* Размер текста результата */
+            margin: 20px 0;
+            text-align: center; /* Выравнивание текста по центру */
+            position: fixed; /* Фиксированное положение */
+            top: 50%; /* Центрирование по вертикали */
+            left: 50%; /* Центрирование по горизонтали */
+            transform: translate(-50%, -50%); /* Сдвиг для центрирования */
+            padding: 20px;
+            background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
+            border-radius: 10px; /* Скругление углов */
+            width: 80%; /* Максимальная ширина блока */
+            max-width: 600px; /* Максимальная ширина блока */
+            z-index: 999; /* Поверх остальных элементов */
+        }
+
+        #loading {
+            display: none; /* Скрытие блока загрузки по умолчанию */
+            font-size: 24px; /* Размер текста загрузки */
+            text-align: center; /* Выравнивание текста по центру */
         }
 
         #buttons {
             display: flex;
             flex-direction: column;
+            position: fixed; /* Фиксированное положение для кнопок */
+            bottom: 0; /* Привязка к низу экрана */
+            left: 50%; /* Центрирование по горизонтали */
+            transform: translateX(-50%); /* Центрирование по горизонтали */
             width: 80%;
         }
 
         #buttonRow {
             display: flex;
             justify-content: space-between; /* Распределяем кнопки по горизонтали */
+            width: 100%; /* Кнопки занимают всю ширину родительского контейнера */
         }
 
         button, select {
-            background-color: #424242;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-            padding: 15px;
-            cursor: pointer;
-            transition: background-color 0.3s;
+            background-color: #424242; /* Темный фон для кнопок и селектов */
+            border: none; /* Без границы */
+            border-radius: 5px; /* Скругление углов */
+            color: white; /* Белый текст */
+            font-size: 18px; /* Размер текста */
+            padding: 15px; /* Внутренние отступы */
+            cursor: pointer; /* Курсор в виде указателя при наведении */
+            transition: background-color 0.3s; /* Плавный переход цвета фона */
             width: 100%; /* Кнопки занимают всю ширину родительского контейнера */
             margin: 5px 0; /* Отступ только по вертикали */
         }
 
         button:hover, select:hover {
-            background-color: #616161;
-        }
-
-        #result, #loading {
-            display: none;
-            font-size: 24px;
-            margin-bottom: 10px;
-            text-align: center;
+            background-color: #616161; /* Цвет фона при наведении */
         }
     </style>
 </head>
 <body>
 
-    <div id="title">GURUTRADE</div>
-    <div id="result"></div>
-    <div id="loading">Загрузка...</div>
+<div id="header">
+    <h1>GURUHACK</h1>
+</div>
 
-    <div id="buttons">
-        <div id="buttonRow">
-            <select id="nameSelect">
-                <option value="">Выберите Название</option>
-                <option value="Название 1">Название 1</option>
-                <option value="Название 2">Название 2</option>
-                <option value="Название 3">Название 3</option>
-                <option value="Название 4">Название 4</option>
-                <option value="Название 5">Название 5</option>
-                <option value="Название 6">Название 6</option>
-                <option value="Название 7">Название 7</option>
-                <option value="Название 8">Название 8</option>
-                <option value="Название 9">Название 9</option>
-                <option value="Название 10">Название 10</option>
-            </select>
-            <select id="timeSelect">
-                <option value="">Выберите Время</option>
-                <option value="10 мин">10 мин</option>
-                <option value="20 мин">20 мин</option>
-                <option value="30 мин">30 мин</option>
-                <option value="40 мин">40 мин</option>
-                <option value="50 мин">50 мин</option>
-                <option value="60 мин">60 мин</option>
-            </select>
-        </div>
-        <button onclick="displayLoading()">Показать Результат</button>
+<div id="result"></div>
+<div id="loading">Загрузка...</div>
+
+<div id="buttons">
+    <div id="buttonRow">
+        <select id="nameSelect">
+            <option value="">Выберите Название</option>
+            <option value="Название 1">Название 1</option>
+            <option value="Название 2">Название 2</option>
+            <option value="Название 3">Название 3</option>
+            <option value="Название 4">Название 4</option>
+            <option value="Название 5">Название 5</option>
+            <option value="Название 6">Название 6</option>
+            <option value="Название 7">Название 7</option>
+            <option value="Название 8">Название 8</option>
+            <option value="Название 9">Название 9</option>
+            <option value="Название 10">Название 10</option>
+        </select>
+        <select id="timeSelect">
+            <option value="">Выберите Время</option>
+            <option value="10 мин">10 мин</option>
+            <option value="20 мин">20 мин</option>
+            <option value="30 мин">30 мин</option>
+            <option value="40 мин">40 мин</option>
+            <option value="50 мин">50 мин</option>
+            <option value="60 мин">60 мин</option>
+        </select>
     </div>
+    <button id="showResultButton">Показать Результат</button>
+</div>
 
-    <script>
-        function displayLoading() {
-            const loadingDiv = document.getElementById("loading");
-            const resultDiv = document.getElementById("result");
-            const nameSelect = document.getElementById("nameSelect");
-            const timeSelect = document.getElementById("timeSelect");
+<script>
+    let lastResultTime = 0; // Время последнего получения результата (в миллисекундах)
+    const resultCooldown = 30000; // 30 секунд (в миллисекундах)
 
-            const selectedName = nameSelect.value;
-            const selectedTime = timeSelect.value;
+    function displayLoading() {
+        const loadingDiv = document.getElementById("loading");
+        const resultDiv = document.getElementById("result");
+        const nameSelect = document.getElementById("nameSelect");
+        const timeSelect = document.getElementById("timeSelect");
 
-            if (!selectedName || !selectedTime) {
-                alert("Пожалуйста, выберите название и время.");
-                return;
-            }
+        const selectedName = nameSelect.value;
+        const selectedTime = timeSelect.value;
 
-            loadingDiv.style.display = "block";
-            resultDiv.style.display = "none";
-
-            setTimeout(() => {
-                loadingDiv.style.display = "none";
-
-                const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая стрелка вверх или красная стрелка вниз
-                const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
-
-                resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
-                resultDiv.style.display = "block";
-            }, 500); // 0.5 секунды
+        if (!selectedName || !selectedTime) {
+            alert("Пожалуйста, выберите название и время.");
+            return;
         }
-    </script>
+
+        const currentTime = Date.now();
+        if (currentTime - lastResultTime < resultCooldown) {
+            const remainingTime = Math.ceil((resultCooldown - (currentTime - lastResultTime)) / 1000);
+            alert(`Пожалуйста, подождите ${remainingTime} секунд(ы), прежде чем запрашивать новый результат.`);
+            return;
+        }
+
+        // Обновляем время последнего получения результата
+        lastResultTime = currentTime;
+
+        loadingDiv.style.display = "block"; // Показать блок загрузки
+        resultDiv.style.display = "none"; // Скрыть блок результата
+
+        setTimeout(() => {
+            loadingDiv.style.display = "none"; // Скрыть блок загрузки
+            const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая стрелка или красная стрелка
+            const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
+
+            // Вывод результата в блок
+            resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
+            resultDiv.style.display = "block"; // Показать блок результата
+        }, 500); // 0.5 секунды задержки
+    }
+
+    document.getElementById("showResultButton").onclick = displayLoading;
+</script>
 </body>
 </html>
