@@ -38,29 +38,30 @@
             display: flex;
             flex-direction: column;
             align-items: stretch; /* Кнопки занимают всю ширину */
-            width: 300px; /* Задаем ширину контейнера с кнопками */
+            width: 90%; /* Меняем ширину на 90% для лучшей отзывчивости */
+            max-width: 400px; /* Добавляем максимальную ширину */
         }
         .button-container {
             display: flex;
             justify-content: space-between; /* Располагаем кнопки рядами */
         }
         button, select {
-            font-size: 18px; /* Увеличиваем размер текста */
-            padding: 15px; /* Увеличиваем внутренние отступы */
+            font-size: 16px; /* Уменьшаем размер шрифта для мобильных */
+            padding: 12px; /* Уменьшаем внутренние отступы */
             margin: 5px; /* Отступы между кнопками */
             cursor: pointer; /* Курсор в виде указателя при наведении */
             border: none; /* Убираем бордер */
             border-radius: 5px; /* Округляем углы кнопок */
             background-color: #888; /* Серый цвет для кнопок выбора */
             color: white;
-            flex-grow: 1; /* Занимает всю доступную ширину */
+            flex: 1; /* Занимает всю доступную ширину */
         }
         button:hover {
             background-color: #777; /* Темно-серый цвет при наведении для кнопок выбора */
         }
         button#showResultButton {
             background-color: #4CAF50; /* Зеленый цвет */
-            height: 60px; /* Высота кнопки показать результат */
+            height: 50px; /* Высота кнопки показать результат */
             width: 100%; /* Ширина, равная ширине контейнера */
         }
         button#showResultButton:hover {
@@ -77,6 +78,17 @@
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
+        }
+        
+        /* Медиа-запросы для мобильных устройств */
+        @media (max-width: 600px) {
+            button, select {
+                font-size: 14px; /* Уменьшаем размер шрифта для маленьких экранов */
+                padding: 10px; /* Уменьшаем внутренние отступы */
+            }
+            button#showResultButton {
+                height: 45px; /* Уменьшаем высоту кнопки на маленьких экранах */
+            }
         }
     </style>
 </head>
@@ -147,13 +159,11 @@
             }
 
             lastResultTime = currentTime;
-
             loadingDiv.style.display = "flex"; // Показываем загрузку
             resultDiv.style.display = "none"; // Скрываем результат
 
             setTimeout(() => {
                 loadingDiv.style.display = "none"; // Скрываем блок загрузки
-
                 const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая или красная стрелка
                 const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
 
