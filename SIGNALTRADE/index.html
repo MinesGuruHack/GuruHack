@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Веб Приложение</title>
     <style>
         body {
@@ -14,20 +14,25 @@
             justify-content: center;
             height: 100vh;
             margin: 0;
+            font-family: Arial, sans-serif;
         }
-        
+
         #title {
-            font-size: 48px; /* Размер текста */
-            color: yellow; /* Цвет текста */
-            margin-bottom: 20px; /* Отступ снизу */
+            font-size: 48px;
+            color: yellow;
+            margin-bottom: 20px;
+            text-align: center;
         }
 
         #buttons {
             display: flex;
-            justify-content: space-around;
-            width: 100%;
-            position: absolute;
-            bottom: 20px;
+            flex-direction: column;
+            width: 80%;
+        }
+
+        #buttonRow {
+            display: flex;
+            justify-content: space-between; /* Распределяем кнопки по горизонтали */
         }
 
         button, select {
@@ -37,60 +42,55 @@
             color: white;
             font-size: 18px;
             padding: 15px;
-            margin: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%; /* Кнопки занимают всю ширину родительского контейнера */
+            margin: 5px 0; /* Отступ только по вертикали */
         }
 
         button:hover, select:hover {
             background-color: #616161;
         }
 
-        #result {
+        #result, #loading {
             display: none;
             font-size: 24px;
             margin-bottom: 10px;
-        }
-
-        #loading {
-            display: none;
-            font-size: 24px;
-            margin-bottom: 10px;
+            text-align: center;
         }
     </style>
 </head>
 <body>
 
-    <div id="title">GURUTRADE</div> <!-- Заголовок приложения -->
-    
+    <div id="title">GURUTRADE</div>
     <div id="result"></div>
     <div id="loading">Загрузка...</div>
 
     <div id="buttons">
-        <select id="nameSelect">
-            <option value="">Выберите Название</option>
-            <option value="Название 1">Название 1</option>
-            <option value="Название 2">Название 2</option>
-            <option value="Название 3">Название 3</option>
-            <option value="Название 4">Название 4</option>
-            <option value="Название 5">Название 5</option>
-            <option value="Название 6">Название 6</option>
-            <option value="Название 7">Название 7</option>
-            <option value="Название 8">Название 8</option>
-            <option value="Название 9">Название 9</option>
-            <option value="Название 10">Название 10</option>
-        </select>
-        
-        <select id="timeSelect">
-            <option value="">Выберите Время</option>
-            <option value="10 мин">10 мин</option>
-            <option value="20 мин">20 мин</option>
-            <option value="30 мин">30 мин</option>
-            <option value="40 мин">40 мин</option>
-            <option value="50 мин">50 мин</option>
-            <option value="60 мин">60 мин</option>
-        </select>
-        
+        <div id="buttonRow">
+            <select id="nameSelect">
+                <option value="">Выберите Название</option>
+                <option value="Название 1">Название 1</option>
+                <option value="Название 2">Название 2</option>
+                <option value="Название 3">Название 3</option>
+                <option value="Название 4">Название 4</option>
+                <option value="Название 5">Название 5</option>
+                <option value="Название 6">Название 6</option>
+                <option value="Название 7">Название 7</option>
+                <option value="Название 8">Название 8</option>
+                <option value="Название 9">Название 9</option>
+                <option value="Название 10">Название 10</option>
+            </select>
+            <select id="timeSelect">
+                <option value="">Выберите Время</option>
+                <option value="10 мин">10 мин</option>
+                <option value="20 мин">20 мин</option>
+                <option value="30 мин">30 мин</option>
+                <option value="40 мин">40 мин</option>
+                <option value="50 мин">50 мин</option>
+                <option value="60 мин">60 мин</option>
+            </select>
+        </div>
         <button onclick="displayLoading()">Показать Результат</button>
     </div>
 
@@ -100,11 +100,10 @@
             const resultDiv = document.getElementById("result");
             const nameSelect = document.getElementById("nameSelect");
             const timeSelect = document.getElementById("timeSelect");
-            
+
             const selectedName = nameSelect.value;
             const selectedTime = timeSelect.value;
 
-            // Проверка, что оба выбора сделаны
             if (!selectedName || !selectedTime) {
                 alert("Пожалуйста, выберите название и время.");
                 return;
