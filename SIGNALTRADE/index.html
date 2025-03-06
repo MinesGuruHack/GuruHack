@@ -2,101 +2,151 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin: 0;
-            padding: 0;
             height: 100vh;
-            background-color: #121212; /* Темный фон */
+            background-color: #121212;
             color: white;
         }
+
         #header {
-            background-color: #121212; /* Темный цвет фона */
-            color: #FFD700; /* Желтый цвет */
+            background-color: #121212;
+            color: #FFD700;
             padding: 20px;
             width: 100%;
             text-align: center;
-            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Эффект неона */
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
         }
+
         #loading {
-            display: none; /* Изначально скрываем блок загрузки */
-            margin-top: 20px;
+            display: none; /* Изначально скрываем */
+            position: absolute; /* Сделаем абсолютное позиционирование */
+            top: 50%; /* Центрируем по верху */
+            left: 50%; /* Центрируем по левому краю */
+            transform: translate(-50%, -50%); /* Центрируем элемент относительно самого себя */
+            width: 100px; /* Ширина анимации загрузки */
+            height: 100px; /* Высота анимации загрузки */
+            z-index: 1000; /* Поверх других элементов */
         }
-        #result {
-            margin-top: 20px;
-            font-size: 18px; /* Увеличиваем размер текста */
-            text-align: center; /* Центрируем результат */
+
+        .loader {
+            border: 16px solid #f3f3f3; /* Светло-серый */
+            border-top: 16px solid #3498db; /* Синий */
+            border-radius: 50%;
+            width: 100%; /* Размер анимации загрузки */
+            height: 100%; /* Размер анимации загрузки */
+            animation: spin 2s linear infinite; /* Анимация вращения */
         }
-        #buttons {
-            display: flex;
-            align-items: center; /* Чтобы кнопки и селекты были на одной линии */
-            margin-top: auto; /* Убираем отступ сверху */
-            margin-bottom: 20px; /* Небольшой отступ от нижнего края */
-            max-width: 400px; /* Максимальная ширина блока кнопок */
-            flex-wrap: wrap; /* Разрешаем перенос элементов на новую строку */
-        }
-        .button-container {
-            display: flex;
-            flex-direction: row; /* Размещаем кнопки и селекты в строку */
-            width: 100%;
-            justify-content: space-between; /* Размещаем элементы на всю ширину */
-        }
-        button, select {
-            font-size: 18px; /* Увеличиваем размер шрифта для кнопок и селектов */
-            padding: 16px; /* Увеличиваем внутренние отступы */
-            margin: 5px; /* Отступы между элементами */
-            cursor: pointer; /* Курсор в виде указателя при наведении */
-            border: none; /* Убираем бордер */
-            border-radius: 5px; /* Округляем углы кнопок */
-            background-color: #888; /* Серый цвет для кнопок выбора */
-            color: white;
-            flex: 1; /* Занимаем равное пространство */
-        }
-        button:hover {
-            background-color: #777; /* Темно-серый цвет при наведении для кнопок выбора */
-        }
-        button#showResultButton {
-            background-color: #4CAF50; /* Зеленый цвет */
-            height: 60px; /* Высота кнопки показать результат */
-            font-weight: bold; /* Жирный шрифт */
-            font-size: 20px; /* Более крупный текст */
-            flex-basis: 100%; /* Займёт всю ширину */
-        }
-        button#showResultButton:hover {
-            background-color: #45a049; /* Темно-зеленый цвет при наведении */
-        }
-        #loading-spinner {
-            border: 6px solid #f3f3f3; /* Светлый цвет фона */
-            border-top: 6px solid #3498db; /* Цвет верхнего края */
-            border-radius: 50%; /* Округление */
-            width: 50px; /* Ширина спиннера */
-            height: 50px; /* Высота спиннера */
-            animation: spin 1s linear infinite; /* Анимация */
-        }
+
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        #contactBox {
-            width: 100%; /* Занимает всю ширину */
-            max-width: 400px; /* Максимальная ширина окошка */
-            background-color: rgba(128, 128, 128, 0.7); /* Серый цвет с прозрачностью */
-            color: white;
-            padding: 16px; /* Внутренние отступы */
-            border-radius: 5px; /* Округление углов */
-            text-align: center; /* Центрируем текст */
-            margin-top: 20px; /* Отступ сверху, равный отступу между кнопками */
-            display: flex; /* Изменение на flex для вертикального центрирования текста */
-            justify-content: center; /* Центрируем текст по горизонтали */
-            align-items: center; /* Центрируем текст по вертикали */
-            font-size: 20px; /* Увеличиваем размер текста */
-            font-weight: bold; /* Жирный текст */
+
+        #result {
+            margin-top: 10px;
+            font-size: 18px;
+            display: none; /* Изначально скрываем результат */
+            text-align: center; /* Центрируем текст результата */
         }
+
+        #result img {
+            width: 400px; /* Размер изображения результата */
+            height: auto; /* Автоматическая высота */
+            margin-top: 10px; /* Подгонка отступа */
+        }
+
+        #buttons {
+            display: flex;
+            align-items: center;
+            margin-top: auto;
+            margin-bottom: 10px;
+            max-width: 400px;
+            flex-wrap: wrap;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-between;
+        }
+
+        button, select {
+            font-size: 18px;
+            padding: 16px;
+            margin: 5px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #888; /* Серый цвет для кнопок выбора */
+            color: white;
+            flex: 1;
+        }
+
+        button:hover {
+            background-color: #777; /* Темно-серый цвет при наведении для кнопок выбора */
+        }
+
+        button#showResultButton {
+            background-color: #4CAF50; /* Зеленый цвет для кнопки "Получить сигнал" */
+            height: 60px; /* Высота кнопки показать результат */
+            font-weight: bold;
+            font-size: 20px; /* Более крупный текст */
+            flex-basis: 100%; /* Займет всю ширину */
+        }
+
+        button#showResultButton:hover {
+            background-color: #45a049; /* Темно-зеленый цвет при наведении */
+        }
+
+        #contactBox {
+    background: rgba(255, 255, 255, 0.2); /* Полупрозрачный фон */
+    padding: 10px; /* Отступы внутри */
+    border-radius: 5px; /* Скругление углов */
+    display: flex; /* Используем Flexbox */
+    align-items: center; /* Центрируем по вертикали */
+    justify-content: center; /* Центрируем по горизонтали */
+    margin-top: 2px; /* Отступ сверху для отделения от других элементов */
+    width: 400px; /* Автоматически подстраивается под содержимое */
+}
+
+        #contactBox img {
+            margin-right: 5px; /* Отступ от изображения к тексту */
+        }
+
+        #contactBox span {
+            font-size: 24px; /* Крупный текст */
+            font-weight: bold; /* Жирный текст */
+            color: white; /* Цвет текста */
+        }
+
+        @media (max-width: 600px) {
+            body {
+                font-size: 16px; /* Меньший размер шрифта для мобильных */
+            }
+
+            #buttons {
+                flex-direction: column; /* Вертикально расположенные кнопки на мобильных */
+            }
+
+            button, select {
+                width: 100%; /* Кнопки и селекты занимают полную ширину */
+                margin: 5px 0; /* Отступы между элементами */
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -105,10 +155,13 @@
     </div>
 
     <div id="loading">
-        <div id="loading-spinner"></div>
+        <div class="loader"></div>
     </div>
 
-    <div id="result"></div>
+    <div id="result">
+        <img id="resultImage" src="" alt="Результат" />
+        <p id="resultText"></p>
+    </div>
 
     <div id="buttons">
         <div class="button-container">
@@ -135,12 +188,12 @@
                 <option value="30 мин">30 мин</option>
             </select>
         </div>
-        <button id="showResultButton">Показать Результат</button>
+        <button id="showResultButton">Получить сигнал</button>
     </div>
 
     <div id="contactBox">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Telegram_logo.svg" alt="Telegram" width="24" height="24"/>
-        <span>@username</span>
+        <img src="images/logo.svg" alt="Telegram" width="24" height="24" />
+        <span>       @username</span>
     </div>
 
     <script>
@@ -152,7 +205,7 @@
             const resultDiv = document.getElementById("result");
             const nameSelect = document.getElementById("nameSelect");
             const timeSelect = document.getElementById("timeSelect");
-            const contactBox = document.getElementById("contactBox"); // Получаем контакт-бокс
+            const contactBox = document.getElementById("contactBox");
 
             const selectedName = nameSelect.value;
             const selectedTime = timeSelect.value;
@@ -162,26 +215,36 @@
                 return;
             }
 
-            const currentTime = Date.now();
-            if (currentTime - lastResultTime < resultCooldown) {
-                const remainingTime = Math.ceil((resultCooldown - (currentTime - lastResultTime)) / 1000);
+            const now = new Date();
+            const formattedDate = now.toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
+
+            if (Date.now() - lastResultTime < resultCooldown) {
+                const remainingTime = Math.ceil((resultCooldown - (Date.now() - lastResultTime)) / 1000);
                 alert(`Пожалуйста, подождите ${remainingTime} секунд(ы), прежде чем запрашивать новый результат.`);
                 return;
             }
 
-            lastResultTime = currentTime;
-
+            lastResultTime = Date.now();
             loadingDiv.style.display = "flex"; // Показываем загрузку
             resultDiv.style.display = "none"; // Скрываем результат
             contactBox.style.display = "flex"; // Убедимся, что контакт-бокс виден
 
+            // Задержка 1 секунда
             setTimeout(() => {
                 loadingDiv.style.display = "none"; // Скрываем блок загрузки
-                const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая или красная стрелка
-                const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
+                const randomPercentage = Math.floor(Math.random() * (98 - 86 + 1)) + 86; // Рандомное число от 86 до 98
+                const isUpward = Math.random() < 0.5; // 50% вероятность
 
-                // Вывод результата в блок
-                resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
+                const resultImage = document.getElementById("resultImage");
+                const resultText = document.getElementById("resultText");
+
+                if (isUpward) {
+                    resultImage.src = "images/green.jpg"; // Зелёная стрелка вверх
+                } else {
+                    resultImage.src = "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; // Красная стрелка вниз
+                }
+
+                resultText.innerText = `Время получения сигнала: ${formattedDate}\nВероятность проходимости сигнала: ${randomPercentage}%\nСигнал сгенерирован с помощью нейросети`;
                 resultDiv.style.display = "block"; // Показываем блок результата
             }, 1000); // Задержка 1 секунда
         }
