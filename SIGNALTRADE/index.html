@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Веб Приложение</title>
+    <style>
+        body {
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        #title {
+            font-size: 48px; /* Размер текста */
+            color: yellow; /* Цвет текста */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+
+        #buttons {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            position: absolute;
+            bottom: 20px;
+        }
+
+        button, select {
+            background-color: #424242;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+            padding: 15px;
+            margin: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover, select:hover {
+            background-color: #616161;
+        }
+
+        #result {
+            display: none;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        #loading {
+            display: none;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="title">GURUTRADE</div> <!-- Заголовок приложения -->
+    
+    <div id="result"></div>
+    <div id="loading">Загрузка...</div>
+
+    <div id="buttons">
+        <select id="nameSelect">
+            <option value="">Выберите Название</option>
+            <option value="Название 1">Название 1</option>
+            <option value="Название 2">Название 2</option>
+            <option value="Название 3">Название 3</option>
+            <option value="Название 4">Название 4</option>
+            <option value="Название 5">Название 5</option>
+            <option value="Название 6">Название 6</option>
+            <option value="Название 7">Название 7</option>
+            <option value="Название 8">Название 8</option>
+            <option value="Название 9">Название 9</option>
+            <option value="Название 10">Название 10</option>
+        </select>
+        
+        <select id="timeSelect">
+            <option value="">Выберите Время</option>
+            <option value="10 мин">10 мин</option>
+            <option value="20 мин">20 мин</option>
+            <option value="30 мин">30 мин</option>
+            <option value="40 мин">40 мин</option>
+            <option value="50 мин">50 мин</option>
+            <option value="60 мин">60 мин</option>
+        </select>
+        
+        <button onclick="displayLoading()">Показать Результат</button>
+    </div>
+
+    <script>
+        function displayLoading() {
+            const loadingDiv = document.getElementById("loading");
+            const resultDiv = document.getElementById("result");
+            const nameSelect = document.getElementById("nameSelect");
+            const timeSelect = document.getElementById("timeSelect");
+            
+            const selectedName = nameSelect.value;
+            const selectedTime = timeSelect.value;
+
+            // Проверка, что оба выбора сделаны
+            if (!selectedName || !selectedTime) {
+                alert("Пожалуйста, выберите название и время.");
+                return;
+            }
+
+            loadingDiv.style.display = "block";
+            resultDiv.style.display = "none";
+
+            setTimeout(() => {
+                loadingDiv.style.display = "none";
+
+                const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая стрелка вверх или красная стрелка вниз
+                const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
+
+                resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
+                resultDiv.style.display = "block";
+            }, 500); // 0.5 секунды
+        }
+    </script>
+</body>
+</html>
