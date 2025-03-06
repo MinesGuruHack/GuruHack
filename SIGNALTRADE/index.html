@@ -2,196 +2,168 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Веб Приложение</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: #121212; /* Темный фон */
-            color: #ffffff; /* Белый цвет текста */
+            font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            padding-bottom: 60px; /* Отступ внизу для кнопок */
+            padding: 0;
+            height: 100vh;
+            background-color: #121212; /* Темный фон */
+            color: white;
         }
-
         #header {
-            background-color: #000; /* Черный фон для заголовка */
-            width: 100%; /* Заголовок на всю ширину */
-            padding: 10px 0; /* Отступы сверху и снизу */
-            text-align: center; /* Выравнивание по центру */
-            position: fixed; /* Фиксированное положение */
-            top: 0; /* Прилегание к верхней части */
-            z-index: 1000; /* Поверх других элементов */
-        }
-
-        #header h1 {
-            color: yellow; /* Желтый цвет текста */
-            margin: 0; /* Удаление отступов по умолчанию у заголовка */
-        }
-
-        #result {
-            display: none; /* Скрытие блока с результатом по умолчанию */
-            font-size: 24px; /* Размер текста результата */
-            margin: 20px 0;
-            text-align: center; /* Выравнивание текста по центру */
-            position: fixed; /* Фиксированное положение */
-            top: 50%; /* Центрирование по вертикали */
-            left: 50%; /* Центрирование по горизонтали */
-            transform: translate(-50%, -50%); /* Сдвиг для центрирования */
+            background-color: #333;
+            color: #FFD700; /* Желтый цвет */
             padding: 20px;
-            background-color: rgba(0, 0, 0, 0.8); /* Полупрозрачный черный фон */
-            border-radius: 10px; /* Скругление углов */
-            width: 80%; /* Максимальная ширина блока */
-            max-width: 600px; /* Максимальная ширина блока */
-            z-index: 999; /* Поверх остальных элементов */
+            width: 100%;
+            text-align: center;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8); /* Эффект неона */
         }
-
         #loading {
-            display: none; /* Скрытие блока загрузки по умолчанию */
-            text-align: center; /* Выравнивание текста по центру */
+            display: none; /* Изначально скрываем блок загрузки */
+            margin-top: 20px;
         }
-
+        #result {
+            margin-top: 20px;
+            font-size: 18px; /* Увеличиваем размер текста */
+            text-align: center; /* Центрируем результат */
+        }
+        #buttons {
+            margin-top: auto; /* Убираем отступ сверху */
+            margin-bottom: 20px; /* Небольшой отступ от нижнего края */
+            display: flex;
+            flex-direction: column;
+            align-items: stretch; /* Кнопки занимают всю ширину */
+            width: 300px; /* Задаем ширину контейнера с кнопками */
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between; /* Располагаем кнопки рядами */
+        }
+        button, select {
+            font-size: 18px; /* Увеличиваем размер текста */
+            padding: 15px; /* Увеличиваем внутренние отступы */
+            margin: 5px; /* Отступы между кнопками */
+            cursor: pointer; /* Курсор в виде указателя при наведении */
+            border: none; /* Убираем бордер */
+            border-radius: 5px; /* Округляем углы кнопок */
+            background-color: #888; /* Серый цвет для кнопок выбора */
+            color: white;
+            flex-grow: 1; /* Занимает всю доступную ширину */
+        }
+        button:hover {
+            background-color: #777; /* Темно-серый цвет при наведении для кнопок выбора */
+        }
+        button#showResultButton {
+            background-color: #4CAF50; /* Зеленый цвет */
+            height: 60px; /* Высота кнопки показать результат */
+            width: 100%; /* Ширина, равная ширине контейнера */
+        }
+        button#showResultButton:hover {
+            background-color: #45a049; /* Темно-зеленый цвет при наведении */
+        }
         #loading-spinner {
-            display: none; /* Скрытие спиннера по умолчанию */
-            width: 50px;
-            height: 50px;
-            border: 5px solid #424242; /* Цвет границы */
-            border-top: 5px solid #ffffff; /* Цвет верхней части */
-            border-radius: 50%; /* Круглая форма */
-            animation: spin 1s linear infinite; /* Анимация вращения */
-            margin: 10px auto; /* Центрирование */
+            border: 6px solid #f3f3f3; /* Светлый цвет фона */
+            border-top: 6px solid #3498db; /* Цвет верхнего края */
+            border-radius: 50%; /* Округление */
+            width: 50px; /* Ширина спиннера */
+            height: 50px; /* Высота спиннера */
+            animation: spin 1s linear infinite; /* Анимация */
         }
-
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-
-        #buttons {
-            display: flex;
-            flex-direction: column;
-            position: fixed; /* Фиксированное положение для кнопок */
-            bottom: 20px; /* Привязка к низу экрана с отступом */
-            left: 50%; /* Центрирование по горизонтали */
-            transform: translateX(-50%); /* Центрирование по горизонтали */
-            width: 80%;
-        }
-
-        #buttonRow {
-            display: flex;
-            justify-content: space-between; /* Распределяем кнопки по горизонтали */
-            width: 100%; /* Кнопки занимают всю ширину родительского контейнера */
-        }
-
-        button, select {
-            background-color: #424242; /* Темный фон для кнопок и селектов */
-            border: none; /* Без границы */
-            border-radius: 5px; /* Скругление углов */
-            color: white; /* Белый текст */
-            font-size: 18px; /* Размер текста */
-            padding: 15px; /* Внутренние отступы */
-            cursor: pointer; /* Курсор в виде указателя при наведении */
-            transition: background-color 0.3s; /* Плавный переход цвета фона */
-            width: 100%; /* Кнопки занимают всю ширину родительского контейнера */
-            margin: 5px 0; /* Отступ только по вертикали */
-        }
-
-        button:hover, select:hover {
-            background-color: #616161; /* Цвет фона при наведении */
-        }
     </style>
 </head>
 <body>
-
-<div id="header">
-    <h1>GURUHACK</h1>
-</div>
-
-<div id="loading">
-    Загрузка...
-    <div id="loading-spinner"></div>
-</div>
-<div id="result"></div>
-
-<div id="buttons">
-    <div id="buttonRow">
-        <select id="nameSelect">
-            <option value="">Выберите Название</option>
-            <option value="Название 1">Название 1</option>
-            <option value="Название 2">Название 2</option>
-            <option value="Название 3">Название 3</option>
-            <option value="Название 4">Название 4</option>
-            <option value="Название 5">Название 5</option>
-            <option value="Название 6">Название 6</option>
-            <option value="Название 7">Название 7</option>
-            <option value="Название 8">Название 8</option>
-            <option value="Название 9">Название 9</option>
-            <option value="Название 10">Название 10</option>
-        </select>
-        
-        <select id="timeSelect">
-            <option value="">Выберите Время</option>
-            <option value="10 мин">10 мин</option>
-            <option value="20 мин">20 мин</option>
-            <option value="30 мин">30 мин</option>
-            <option value="40 мин">40 мин</option>
-            <option value="50 мин">50 мин</option>
-            <option value="60 мин">60 мин</option>
-        </select>
+    <div id="header">
+        <h1>GURUHACK</h1>
     </div>
-    <button id="showResultButton">Показать Результат</button>
-</div>
 
-<script>
-    let lastResultTime = 0; // Время последнего получения результата (в миллисекундах)
-    const resultCooldown = 30000; // 30 секунд (в миллисекундах)
+    <div id="loading">
+        <div id="loading-spinner"></div>
+    </div>
 
-    function displayLoading() {
-        const loadingDiv = document.getElementById("loading");
-        const loadingSpinner = document.getElementById("loading-spinner");
-        const resultDiv = document.getElementById("result");
-        const nameSelect = document.getElementById("nameSelect");
-        const timeSelect = document.getElementById("timeSelect");
+    <div id="result"></div>
 
-        const selectedName = nameSelect.value;
-        const selectedTime = timeSelect.value;
+    <div id="buttons">
+        <div class="button-container">
+            <select id="nameSelect">
+                <option value="">Выберите Название</option>
+                <option value="Название 1">Название 1</option>
+                <option value="Название 2">Название 2</option>
+                <option value="Название 3">Название 3</option>
+                <option value="Название 4">Название 4</option>
+                <option value="Название 5">Название 5</option>
+                <option value="Название 6">Название 6</option>
+                <option value="Название 7">Название 7</option>
+                <option value="Название 8">Название 8</option>
+                <option value="Название 9">Название 9</option>
+                <option value="Название 10">Название 10</option>
+            </select>
 
-        if (!selectedName || !selectedTime) {
-            alert("Пожалуйста, выберите название и время.");
-            return;
+            <select id="timeSelect">
+                <option value="">Выберите Время</option>
+                <option value="5 мин">5 мин</option>
+                <option value="10 мин">10 мин</option>
+                <option value="15 мин">15 мин</option>
+                <option value="20 мин">20 мин</option>
+                <option value="25 мин">25 мин</option>
+                <option value="30 мин">30 мин</option>
+            </select>
+        </div>
+
+        <button id="showResultButton">Показать Результат</button>
+    </div>
+
+    <script>
+        let lastResultTime = 0; // Время последнего получения результата (в миллисекундах)
+        const resultCooldown = 30000; // 30 секунд (в миллисекундах)
+
+        function displayLoading() {
+            const loadingDiv = document.getElementById("loading");
+            const resultDiv = document.getElementById("result");
+            const nameSelect = document.getElementById("nameSelect");
+            const timeSelect = document.getElementById("timeSelect");
+
+            const selectedName = nameSelect.value;
+            const selectedTime = timeSelect.value;
+
+            if (!selectedName || !selectedTime) {
+                alert("Пожалуйста, выберите название и время.");
+                return;
+            }
+
+            const currentTime = Date.now();
+            if (currentTime - lastResultTime < resultCooldown) {
+                const remainingTime = Math.ceil((resultCooldown - (currentTime - lastResultTime)) / 1000);
+                alert(`Пожалуйста, подождите ${remainingTime} секунд(ы), прежде чем запрашивать новый результат.`);
+                return;
+            }
+
+            lastResultTime = currentTime;
+
+            loadingDiv.style.display = "flex"; // Показываем загрузку
+            resultDiv.style.display = "none"; // Скрываем результат
+
+            setTimeout(() => {
+                loadingDiv.style.display = "none"; // Скрываем блок загрузки
+
+                const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая или красная стрелка
+                const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
+
+                // Вывод результата в блок
+                resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
+                resultDiv.style.display = "block"; // Показываем блок результата
+            }, 1000); // Задержка 1 секунда
         }
 
-        const currentTime = Date.now();
-        if (currentTime - lastResultTime < resultCooldown) {
-            const remainingTime = Math.ceil((resultCooldown - (currentTime - lastResultTime)) / 1000);
-            alert(`Пожалуйста, подождите ${remainingTime} секунд(ы), прежде чем запрашивать новый результат.`);
-            return;
-        }
-
-        // Обновляем время последнего получения результата
-        lastResultTime = currentTime;
-
-        loadingDiv.style.display = "block"; // Показать блок загрузки
-        loadingSpinner.style.display = "block"; // Показать спиннер
-        resultDiv.style.display = "none"; // Скрыть блок результата
-
-        setTimeout(() => {
-            loadingDiv.style.display = "none"; // Скрыть блок загрузки
-            loadingSpinner.style.display = "none"; // Скрыть спиннер
-            const randomSymbol = Math.random() < 0.5 ? '⬆️' : '⬇️'; // Зеленая стрелка или красная стрелка
-            const randomPercentage = Math.floor(Math.random() * (98 - 87 + 1)) + 87; // Рандомное число от 87 до 98
-
-            // Вывод результата в блок
-            resultDiv.innerHTML = `Выбранное название: ${selectedName}<br>Выбранное время: ${selectedTime}<br>Проходимость сигнала: ${randomPercentage}% ${randomSymbol}`;
-            resultDiv.style.display = "block"; // Показать блок результата
-        }, 2000); // 2 секунды задержки
-    }
-
-    document.getElementById("showResultButton").onclick = displayLoading;
-</script>
+        document.getElementById("showResultButton").onclick = displayLoading;
+    </script>
 </body>
 </html>
