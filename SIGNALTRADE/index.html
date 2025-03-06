@@ -15,7 +15,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center; /* Центрирование по вертикали */
+            justify-content: space-between; /* Размещение элементов между собой */
             height: 100vh; /* Минимальная высота на весь экран */
             background-color: #121212;
             color: white;
@@ -71,18 +71,18 @@
 
         #buttons {
             display: flex;
+            flex-direction: column; /* Вертикальная ориентация */
             align-items: center;
-            margin-top: auto;
-            margin-bottom: 10px;
-            max-width: 300px;
-            flex-wrap: wrap;
+            margin-bottom: 20px; /* Отступ снизу для контакт бокса */
+            width: 100%; /* Ширина на всю доступную ширину */
+            max-width: 400px; /* Максимальная ширина */
         }
 
         .button-container {
             display: flex;
-            flex-direction: row;
-            width: 100%;
-            justify-content: space-between;
+            justify-content: space-between; /* Равное расстояние между кнопками */
+            width: 100%; /* Ширина на всю доступную ширину */
+            margin-bottom: 10px; /* Отступ между кнопками и кнопкой результата */
         }
 
         button, select {
@@ -106,7 +106,7 @@
             height: 60px; /* Высота кнопки показать результат */
             font-weight: bold;
             font-size: 20px; /* Более крупный текст */
-            flex-basis: 100%; /* Займет всю ширину */
+            width: 100%; /* Займет всю ширину */
         }
 
         button#showResultButton:hover {
@@ -120,9 +120,9 @@
             display: flex; /* Используем Flexbox */
             align-items: center; /* Центрируем по вертикали */
             justify-content: center; /* Центрируем по горизонтали */
-            margin-top: 2px; /* Отступ сверху для отделения от других элементов */
+            margin-top: 10px; /* Отступ сверху для отделения от других элементов */
             width: 100%; /* Ширина на всю доступную ширину */
-            max-width: 300px; /* Максимальная ширина */
+            max-width: 400px; /* Максимальная ширина */
         }
 
         #contactBox img {
