@@ -82,8 +82,12 @@
         }
 
         #resultText {
-            font-weight: bold; /* Делает текст более жирным */
-            white-space: pre-line; /* Позволяет использовать переносы строк */
+            font-weight: bold;
+            white-space: pre-line; 
+        }
+
+        .result-line {
+            margin: 5px 0; /* Отступы между строками результата */
         }
 
         #contactBox {
@@ -143,7 +147,11 @@
 
     <div id="result">
         <img id="resultImage" src="" alt="Результат" />
-        <p id="resultText"></p>
+        <div id="resultText">
+            <div class="result-line" id="pairText"></div>
+            <div class="result-line" id="timeText"></div>
+            <div class="result-line" id="probabilityText"></div>
+        </div>
     </div>
 
     <button id="showResultButton">Получить сигнал</button>
@@ -191,12 +199,16 @@
                 const randomPair = pairs[Math.floor(Math.random() * pairs.length)]; 
                 
                 const resultImage = document.getElementById("resultImage");
-                const resultText = document.getElementById("resultText");
+                const pairText = document.getElementById("pairText");
+                const timeText = document.getElementById("timeText");
+                const probabilityText = document.getElementById("probabilityText");
 
                 const isUpward = Math.random() < 0.5; 
                 resultImage.src = isUpward ? "images/green.jpg" : "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
 
-                resultText.innerText = `Рекомендуемая пара: ${randomPair}\nВремя получения сигнала: ${formattedDate}\nВероятность прохождения: ${randomPercentage}%`;
+                pairText.innerText = `Рекомендуемая пара: ${randomPair}`;
+                timeText.innerText = `Время получения сигнала: ${formattedDate}`;
+                probabilityText.innerText = `Вероятность прохождения: ${randomPercentage}%`;
                 resultDiv.style.display = "block"; 
             }, 1000); 
         }
