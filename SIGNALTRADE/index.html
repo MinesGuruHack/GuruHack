@@ -82,12 +82,22 @@
         }
 
         #resultText {
-            font-weight: bold;
+            font-weight: bold; 
             white-space: pre-line; 
         }
 
-        .result-line {
-            margin: 5px 0; /* Отступы между строками результата */
+        #textContainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+            line-height: 1.5; /* Увеличивает расстояние между строками */
+        }
+
+        .textLine {
+            width: 100%; /* Занимает всю ширину */
+            max-width: 300px; /* Ограничивает максимальную ширину */
+            text-align: center; /* Центрирует текст */
         }
 
         #contactBox {
@@ -147,10 +157,11 @@
 
     <div id="result">
         <img id="resultImage" src="" alt="Результат" />
-        <div id="resultText">
-            <div class="result-line" id="pairText"></div>
-            <div class="result-line" id="timeText"></div>
-            <div class="result-line" id="probabilityText"></div>
+        <div id="textContainer">
+            <p class="textLine" id="category1"></p>
+            <p class="textLine" id="category2"></p>
+            <p class="textLine" id="categoryTimeframe"></p>
+            <p class="textLine" id="category3"></p>
         </div>
     </div>
 
@@ -174,13 +185,17 @@
             "Пара 26", "Пара 27", "Пара 28", "Пара 29", "Пара 30"
         ];
 
+        const timeframes = [
+            "1m", "5m", "15m", "1h", "4h", "1d"
+        ];
+
         function displayLoading() {
             const loadingDiv = document.getElementById("loading");
             const resultDiv = document.getElementById("result");
             const contactBox = document.getElementById("contactBox");
 
             const now = new Date();
-            const formattedDate = now.toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
+            const formattedTime = now.toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
             if (Date.now() - lastResultTime < resultCooldown) {
                 const remainingTime = Math.ceil((resultCooldown - (Date.now() - lastResultTime)) / 1000);
@@ -196,19 +211,22 @@
             setTimeout(() => {
                 loadingDiv.style.display = "none"; 
                 const randomPercentage = Math.floor(Math.random() * (98 - 86 + 1)) + 86; 
-                const randomPair = pairs[Math.floor(Math.random() * pairs.length)]; 
-                
+                const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
+                const randomTimeframe = timeframes[Math.floor(Math.random() * timeframes.length)];
+
                 const resultImage = document.getElementById("resultImage");
-                const pairText = document.getElementById("pairText");
-                const timeText = document.getElementById("timeText");
-                const probabilityText = document.getElementById("probabilityText");
+                const category1 = document.getElementById("category1");
+                const category2 = document.getElementById("category2");
+                const categoryTimeframe = document.getElementById("categoryTimeframe");
+                const category3 = document.getElementById("category3");
 
                 const isUpward = Math.random() < 0.5; 
                 resultImage.src = isUpward ? "images/green.jpg" : "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
 
-                pairText.innerText = `Рекомендуемая пара: ${randomPair}`;
-                timeText.innerText = `Время получения сигнала: ${formattedDate}`;
-                probabilityText.innerText = `Вероятность прохождения: ${randomPercentage}%`;
+                category1.innerText = `Рекомендуемая пара: ${randomPair}`;
+                category2.innerText = `Время получения сигнала: ${formattedTime}`;
+                categoryTimeframe.innerText = `Таймфрейм: ${randomTimeframe}`;
+                category3.innerText = `Вероятность прохождения: ${randomPercentage}%`;
                 resultDiv.style.display = "block"; 
             }, 1000); 
         }
