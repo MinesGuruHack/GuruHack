@@ -81,11 +81,6 @@
             margin-top: 10px; 
         }
 
-        #resultText {
-            font-weight: bold; 
-            white-space: pre-line; 
-        }
-
         #textContainer {
             display: flex;
             flex-direction: column;
@@ -96,8 +91,9 @@
 
         .textLine {
             width: 100%; /* Занимает всю ширину */
-            max-width: 300px; /* Ограничивает максимальную ширину */
+            max-width: 400px; /* Ограничивает максимальную ширину для текста */
             text-align: center; /* Центрирует текст */
+            overflow-wrap: break-word; /* Переносит длинные слова на новую строку */
         }
 
         #contactBox {
