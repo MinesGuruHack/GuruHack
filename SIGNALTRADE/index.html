@@ -68,6 +68,10 @@
             font-size: 18px;
             display: none; 
             text-align: center; 
+            position: absolute; 
+            top: 50%; 
+            left: 50%; 
+            transform: translate(-50%, -50%); 
         }
 
         #result img {
@@ -75,6 +79,10 @@
             max-width: 200px; 
             height: auto; 
             margin-top: 10px; 
+        }
+
+        #resultText {
+            font-weight: bold; /* Делает текст более жирным */
         }
 
         #contactBox {
@@ -148,7 +156,6 @@
         let lastResultTime = 0; 
         const resultCooldown = 30000; 
 
-        // Массив случайных названий пар
         const pairs = [
             "Пара 1", "Пара 2", "Пара 3", "Пара 4", "Пара 5", 
             "Пара 6", "Пара 7", "Пара 8", "Пара 9", "Пара 10", 
@@ -180,12 +187,11 @@
             setTimeout(() => {
                 loadingDiv.style.display = "none"; 
                 const randomPercentage = Math.floor(Math.random() * (98 - 86 + 1)) + 86; 
-                const randomPair = pairs[Math.floor(Math.random() * pairs.length)]; // Выбор случайной пары
+                const randomPair = pairs[Math.floor(Math.random() * pairs.length)]; 
                 
                 const resultImage = document.getElementById("resultImage");
                 const resultText = document.getElementById("resultText");
 
-                // Определяем изображение в зависимости от случайного числа
                 const isUpward = Math.random() < 0.5; 
                 resultImage.src = isUpward ? "images/green.jpg" : "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
 
