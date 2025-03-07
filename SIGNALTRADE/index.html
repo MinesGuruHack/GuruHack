@@ -86,14 +86,17 @@
             flex-direction: column;
             align-items: center;
             margin-top: 10px;
-            line-height: 1.5; /* Увеличивает расстояние между строками */
-            max-height: 6em; /* Ограничиваем высоту для 4 строк */
+            line-height: 1.5; 
+            max-width: 300px; /* Ограничиваем максимальную ширину контейнера */
+            height: 6em; /* Высота для 4 строк с отступами */
             overflow: hidden; /* Скрываем лишний текст */
         }
 
         .textLine {
+            overflow: hidden;
+            text-overflow: ellipsis; /* Параметр для обрезки текста */
+            white-space: nowrap; /* Отключаем перенос строки */
             width: 100%; /* Занимает всю ширину */
-            text-align: center; /* Центрирует текст */
         }
 
         #contactBox {
@@ -138,10 +141,6 @@
         @media (max-width: 600px) {
             #result {
                 font-size: 16px; 
-            }
-
-            #textContainer {
-                max-height: 6em; /* Ограничиваем высоту для 4 строк на маленьких экранах */
             }
         }
     </style>
@@ -235,4 +234,3 @@
     </script>
 </body>
 </html>
-
