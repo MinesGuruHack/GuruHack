@@ -15,16 +15,16 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end; /* Изменено на flex-end для размещения элементов внизу */
+            justify-content: flex-end;
             height: 100vh;
             background-color: #121212;
             color: white;
-            padding-bottom: 20px; /* Отступ снизу */
+            padding-bottom: 20px;
         }
 
         #header {
-            position: fixed; /* Это позволяет закрепить шапку */
-            top: 0; /* Устанавливает её в верхней части страницы */
+            position: fixed;
+            top: 0;
             background-color: #121212;
             color: #FFD700;
             padding: 20px;
@@ -34,8 +34,8 @@
         }
         
         #header h1 {
-            font-size: 48px; /* Увеличен размер текста заголовка */
-            margin: 0; /* Убираем отступы вокруг заголовка */
+            font-size: 48px;
+            margin: 0;
         }
 
         #loading {
@@ -77,50 +77,6 @@
             margin-top: 10px; 
         }
 
-        #buttons {
-            display: flex;
-            flex-direction: column; /* Вертикальное расположение для мобильных */
-            align-items: center; /* Центрирование по горизонтали */
-            margin-top: 10px; /* Отступ сверху */
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: space-between;
-            width: 100%; /* Ширина на всю доступную область */
-            max-width: 300px; /* Максимальная ширина */
-            margin-bottom: 10px; /* Отступ между кнопками выбора и кнопкой получения результата */
-        }
-
-        button, select {
-            font-size: 18px;
-            padding: 16px;
-            cursor: pointer;
-            border: none;
-            border-radius: 5px;
-            background-color: #888; 
-            color: white;
-            flex: 1;
-            margin: 0 5px; /* Отступы между кнопками */
-        }
-
-        button:hover {
-            background-color: #777; 
-        }
-
-        button#showResultButton {
-            background-color: #4CAF50; 
-            height: 60px; 
-            font-weight: bold;
-            font-size: 20px; 
-            flex-basis: 100%; 
-            margin-top: 10px; /* Отступ сверху для кнопки получения результата */
-        }
-
-        button#showResultButton:hover {
-            background-color: #45a049; 
-        }
-
         #contactBox {
             background: rgba(255, 255, 255, 0.2); 
             padding: 10px; 
@@ -128,7 +84,7 @@
             display: flex; 
             align-items: center; 
             justify-content: center; 
-            margin-top: 10px; /* Отступ между кнопкой получения результата и контакт боксом */
+            margin-top: 10px; 
             width: 100%; 
             max-width: 300px; 
         }
@@ -143,16 +99,24 @@
             color: white; 
         }
 
+        #showResultButton {
+            background-color: green; 
+            color: white; 
+            border: none; 
+            border-radius: 5px; 
+            padding: 10px; 
+            width: 100%; 
+            max-width: 300px; 
+            font-size: 24px; 
+            cursor: pointer; 
+            margin-top: 10px; 
+        }
+
+        #showResultButton:hover {
+            background-color: darkgreen; 
+        }
+
         @media (max-width: 600px) {
-            #buttons {
-                flex-direction: column; 
-            }
-
-            button, select {
-                width: 100%; 
-                margin: 5px 0; 
-            }
-
             #result {
                 font-size: 16px; 
             }
@@ -173,33 +137,7 @@
         <p id="resultText"></p>
     </div>
 
-    <div id="buttons">
-        <div class="button-container">
-            <select id="nameSelect">
-                <option value="">Выберите Название</option>
-                <option value="Название 1">Название 1</option>
-                <option value="Название 2">Название 2</option>
-                <option value="Название 3">Название 3</option>
-                <option value="Название 4">Название 4</option>
-                <option value="Название 5">Название 5</option>
-                <option value="Название 6">Название 6</option>
-                <option value="Название 7">Название 7</option>
-                <option value="Название 8">Название 8</option>
-                <option value="Название 9">Название 9</option>
-                <option value="Название 10">Название 10</option>
-            </select>
-            <select id="timeSelect">
-                <option value="">Выберите Время</option>
-                <option value="5 мин">5 мин</option>
-                <option value="10 мин">10 мин</option>
-                <option value="15 мин">15 мин</option>
-                <option value="20 мин">20 мин</option>
-                <option value="25 мин">25 мин</option>
-                <option value="30 мин">30 мин</option>
-            </select>
-        </div>
-        <button id="showResultButton">Получить сигнал</button>
-    </div>
+    <button id="showResultButton">Получить сигнал</button>
 
     <div id="contactBox">
         <img src="images/logo.svg" alt="Telegram" width="24" height="24" />
@@ -210,20 +148,20 @@
         let lastResultTime = 0; 
         const resultCooldown = 30000; 
 
+        // Массив случайных названий пар
+        const pairs = [
+            "Пара 1", "Пара 2", "Пара 3", "Пара 4", "Пара 5", 
+            "Пара 6", "Пара 7", "Пара 8", "Пара 9", "Пара 10", 
+            "Пара 11", "Пара 12", "Пара 13", "Пара 14", "Пара 15", 
+            "Пара 16", "Пара 17", "Пара 18", "Пара 19", "Пара 20", 
+            "Пара 21", "Пара 22", "Пара 23", "Пара 24", "Пара 25", 
+            "Пара 26", "Пара 27", "Пара 28", "Пара 29", "Пара 30"
+        ];
+
         function displayLoading() {
             const loadingDiv = document.getElementById("loading");
             const resultDiv = document.getElementById("result");
-            const nameSelect = document.getElementById("nameSelect");
-            const timeSelect = document.getElementById("timeSelect");
             const contactBox = document.getElementById("contactBox");
-
-            const selectedName = nameSelect.value;
-            const selectedTime = timeSelect.value;
-
-            if (!selectedName || !selectedTime) {
-                alert("Пожалуйста, выберите название и время.");
-                return;
-            }
 
             const now = new Date();
             const formattedDate = now.toLocaleString('ru-RU', { dateStyle: 'short', timeStyle: 'short' });
@@ -242,18 +180,16 @@
             setTimeout(() => {
                 loadingDiv.style.display = "none"; 
                 const randomPercentage = Math.floor(Math.random() * (98 - 86 + 1)) + 86; 
-                const isUpward = Math.random() < 0.5; 
-
+                const randomPair = pairs[Math.floor(Math.random() * pairs.length)]; // Выбор случайной пары
+                
                 const resultImage = document.getElementById("resultImage");
                 const resultText = document.getElementById("resultText");
 
-                if (isUpward) {
-                    resultImage.src = "images/green.jpg"; 
-                } else {
-                    resultImage.src = "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
-                }
+                // Определяем изображение в зависимости от случайного числа
+                const isUpward = Math.random() < 0.5; 
+                resultImage.src = isUpward ? "images/green.jpg" : "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
 
-                resultText.innerText = `Время получения сигнала: ${formattedDate}\nВероятность проходимости сигнала: ${randomPercentage}%\nСигнал сгенерирован с помощью нейросети`;
+                resultText.innerText = `Рекомендуемая пара: ${randomPair}\nВремя получения сигнала: ${formattedDate}\nВероятность прохождения: ${randomPercentage}%`;
                 resultDiv.style.display = "block"; 
             }, 1000); 
         }
