@@ -20,6 +20,8 @@
             background-color: #121212;
             color: white;
             padding-bottom: 20px;
+            position: relative;
+            overflow: hidden;
         }
 
         #header {
@@ -32,7 +34,7 @@
             text-align: center;
             text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
         }
-        
+
         #header h1 {
             font-size: 48px;
             margin: 0;
@@ -40,12 +42,10 @@
 
         #loading {
             display: none; 
-            position: absolute; 
+            position: absolute;
             top: 50%; 
             left: 50%; 
             transform: translate(-50%, -50%); 
-            width: 100px; 
-            height: 100px; 
             z-index: 1000; 
         }
 
@@ -53,8 +53,8 @@
             border: 16px solid #f3f3f3; 
             border-top: 16px solid #3498db; 
             border-radius: 50%;
-            width: 100%; 
-            height: 100%; 
+            width: 100px; 
+            height: 100px; 
             animation: spin 2s linear infinite; 
         }
 
@@ -87,16 +87,16 @@
             align-items: center;
             margin-top: 10px;
             line-height: 1.5; 
-            max-width: 300px; /* Ограничиваем максимальную ширину контейнера */
-            height: 6em; /* Высота для 4 строк с отступами */
-            overflow: hidden; /* Скрываем лишний текст */
+            max-width: 300px; 
+            height: 6em; 
+            overflow: hidden; 
         }
 
         .textLine {
             overflow: hidden;
-            text-overflow: ellipsis; /* Параметр для обрезки текста */
-            white-space: nowrap; /* Отключаем перенос строки */
-            width: 100%; /* Занимает всю ширину */
+            text-overflow: ellipsis; 
+            white-space: nowrap;
+            width: 100%;
         }
 
         #contactBox {
@@ -138,10 +138,28 @@
             background-color: darkgreen; 
         }
 
-        @media (max-width: 600px) {
-            #result {
-                font-size: 16px; 
-            }
+        .hacker-text {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            color: rgba(0, 255, 0, 0.1);
+            font-family: monospace;
+            white-space: pre;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: -1; /* Поставим текст на задний план */
+        }
+
+        @keyframes flicker {
+            0% { opacity: 0.1; }
+            50% { opacity: 1; }
+            100% { opacity: 0.1; }
+        }
+
+        .flicker {
+            animation: flicker 0.1s infinite alternate;
         }
     </style>
 </head>
@@ -149,6 +167,8 @@
     <div id="header">
         <h1>GURUHACK</h1>
     </div>
+
+    <div class="hacker-text" id="hackerText"></div>
 
     <div id="loading">
         <div class="loader"></div>
@@ -188,6 +208,32 @@
             "1m", "5m", "15m", "1h", "4h", "1d"
         ];
 
+        function generateRandomText(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        function displayHackerAnimation() {
+            const hackerTextDiv = document.getElementById("hackerText");
+            hackerTextDiv.innerHTML = '';
+            const interval = setInterval(() => {
+                hackerTextDiv.innerHTML += generateRandomText(50) + '<br>';
+                if (hackerTextDiv.children.length > 20) {
+                    hackerTextDiv.removeChild(hackerTextDiv.firstChild);
+                }
+            }, 100);
+            return interval;
+        }
+
+        function clearHackerAnimation(interval) {
+            clearInterval(interval);
+            document.getElementById("hackerText").innerHTML = ''; // Очищаем текст
+        }
+
         function displayLoading() {
             const loadingDiv = document.getElementById("loading");
             const resultDiv = document.getElementById("result");
@@ -207,7 +253,10 @@
             resultDiv.style.display = "none"; 
             contactBox.style.display = "flex"; 
 
+            const hackerAnimationInterval = displayHackerAnimation();
+
             setTimeout(() => {
+                clearHackerAnimation(hackerAnimationInterval);
                 loadingDiv.style.display = "none"; 
                 const randomPercentage = Math.floor(Math.random() * (98 - 86 + 1)) + 86; 
                 const randomPair = pairs[Math.floor(Math.random() * pairs.length)];
