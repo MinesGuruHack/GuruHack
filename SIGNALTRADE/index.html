@@ -87,13 +87,13 @@
             align-items: center;
             margin-top: 10px;
             line-height: 1.5; /* Увеличивает расстояние между строками */
+            max-height: 6em; /* Ограничиваем высоту для 4 строк */
+            overflow: hidden; /* Скрываем лишний текст */
         }
 
         .textLine {
             width: 100%; /* Занимает всю ширину */
-            max-width: 400px; /* Ограничивает максимальную ширину для текста */
             text-align: center; /* Центрирует текст */
-            overflow-wrap: break-word; /* Переносит длинные слова на новую строку */
         }
 
         #contactBox {
@@ -138,6 +138,10 @@
         @media (max-width: 600px) {
             #result {
                 font-size: 16px; 
+            }
+
+            #textContainer {
+                max-height: 6em; /* Ограничиваем высоту для 4 строк на маленьких экранах */
             }
         }
     </style>
@@ -231,3 +235,4 @@
     </script>
 </body>
 </html>
+
