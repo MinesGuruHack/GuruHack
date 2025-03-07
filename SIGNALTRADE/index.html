@@ -157,10 +157,10 @@
     <div id="result">
         <img id="resultImage" src="" alt="Результат" />
         <div id="textContainer">
-            <p class="textLine" id="category1"></p>
-            <p class="textLine" id="category2"></p>
-            <p class="textLine" id="categoryTimeframe"></p>
-            <p class="textLine" id="category3"></p>
+            <p class="textLine" id="category1"><strong></strong></p>
+            <p class="textLine" id="category2"><strong></strong></p>
+            <p class="textLine" id="categoryTimeframe"><strong></strong></p>
+            <p class="textLine" id="category3"><strong></strong></p>
         </div>
     </div>
 
@@ -214,10 +214,10 @@
                 const randomTimeframe = timeframes[Math.floor(Math.random() * timeframes.length)];
 
                 const resultImage = document.getElementById("resultImage");
-                const category1 = document.getElementById("category1");
-                const category2 = document.getElementById("category2");
-                const categoryTimeframe = document.getElementById("categoryTimeframe");
-                const category3 = document.getElementById("category3");
+                const category1 = document.getElementById("category1").children[0];
+                const category2 = document.getElementById("category2").children[0];
+                const categoryTimeframe = document.getElementById("categoryTimeframe").children[0];
+                const category3 = document.getElementById("category3").children[0];
 
                 const isUpward = Math.random() < 0.5; 
                 resultImage.src = isUpward ? "images/green.jpg" : "https://upload.wikimedia.org/wikipedia/commons/d/d4/Down_arrow_icon.png"; 
