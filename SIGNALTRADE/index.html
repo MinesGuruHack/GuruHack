@@ -139,17 +139,17 @@
         }
 
         .hacker-text {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            color: rgba(0, 255, 0, 0.1);
+            position: absolute; /* Изменено на absolute для лучшего позиционирования */
+            top: 50%; /* Позиционирование сверху вниз */
+            left: 50%; /* Центрирование текстового блока */
+            transform: translate(-50%, -50%); /* Центрирование текста */
+            color: rgba(0, 255, 0, 0.5); /* Уменьшена прозрачность */
             font-family: monospace;
             white-space: pre;
             overflow: hidden;
             pointer-events: none;
-            z-index: -1; /* Поставим текст на задний план */
+            text-align: center; /* Центрирование текста */
+            margin: 20px 0; /* Отступы сверху и снизу */
         }
 
         @keyframes flicker {
@@ -168,7 +168,7 @@
         <h1>GURUHACK</h1>
     </div>
 
-    <div class="hacker-text" id="hackerText"></div>
+    <div class="hacker-text" id="hackerText"></div> <!-- Переместили текст сюда -->
 
     <div id="loading">
         <div class="loader"></div>
@@ -276,7 +276,7 @@
                 categoryTimeframe.innerText = `Таймфрейм: ${randomTimeframe}`;
                 category3.innerText = `Вероятность прохождения: ${randomPercentage}%`;
                 resultDiv.style.display = "block"; 
-            }, 1000); 
+            }, 3000); 
         }
 
         document.getElementById("showResultButton").onclick = displayLoading;
