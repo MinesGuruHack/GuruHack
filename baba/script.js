@@ -68,7 +68,7 @@ function startSaturnMovement() {
 
 function getRandomMultiplier() {
     // Генерируем случайное значение с двумя десятичными знаками (сотыми)
-    return (1.20 + Math.random() * 8.80).toFixed(2);
+    return (1.20 + Math.random() * 3.80).toFixed(2);
 }
 
 function updateBalloon(multiplier) {
