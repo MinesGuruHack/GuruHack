@@ -1,1 +1,0 @@
-# krysha-bombucks.github.io
